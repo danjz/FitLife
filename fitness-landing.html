@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FitLife — Tu mejor versión</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green: #39FF14;
+    --green-dim: #2acc0f;
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #181818;
+    --card2: #1e1e1e;
+    --white: #f5f5f5;
+    --gray: #aaaaaa;
+    --danger: #ff4d4d;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #222;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw; height: 64px;
+  }
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 1.5rem; letter-spacing: -1px;
+    color: var(--white);
+  }
+  .logo span { color: var(--green); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--gray);
+    font-size: .875rem; font-weight: 500;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* ── HERO ── */
+  #inicio {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 6vw 60px;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(57,255,20,.12) 0%, transparent 70%),
+      linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+    position: relative; overflow: hidden;
+  }
+  #inicio::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2339FF14' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(57,255,20,.12); border: 1px solid rgba(57,255,20,.3);
+    color: var(--green); font-size: .75rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: .4rem 1rem; border-radius: 999px; margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: clamp(2.8rem, 8vw, 6rem);
+    line-height: 1.0; letter-spacing: -2px;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em { color: var(--green); font-style: normal; }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--gray);
+    max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7;
+  }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; font-size: .9rem; letter-spacing: .5px;
+    padding: .85rem 2rem; border-radius: 8px; cursor: pointer;
+    text-decoration: none; border: none; transition: all .2s; display: inline-block;
+  }
+  .btn-primary { background: var(--green); color: #000; }
+  .btn-primary:hover { background: var(--green-dim); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(57,255,20,.3); }
+  .btn-outline { background: transparent; border: 1px solid #333; color: var(--white); }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+    margin-top: 4rem; padding-top: 2.5rem;
+    border-top: 1px solid #222;
+  }
+  .stat h3 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2rem; color: var(--green); }
+  .stat p { font-size: .8rem; color: var(--gray); margin-top: .25rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 6vw; }
+  .section-tag {
+    display: inline-block;
+    color: var(--green); font-size: .72rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: .75rem;
+  }
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: -1px; margin-bottom: .75rem;
+  }
+  .section-sub { color: var(--gray); max-width: 540px; line-height: 1.7; margin-bottom: 3rem; }
+
+  /* ── CARDS GRID ── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid #222; border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color .25s, transform .25s;
+  }
+  .card:hover { border-color: var(--green); transform: translateY(-4px); }
+  .card-icon { font-size: 2rem; margin-bottom: .75rem; }
+  .card h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: .5rem; }
+  .card p { color: var(--gray); font-size: .875rem; line-height: 1.6; }
+
+  /* ── MACRO CARDS ── */
+  .macro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .macro-card {
+    background: var(--card); border: 1px solid #222; border-radius: 12px;
+    padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+  }
+  .macro-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+  .macro-card h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .9rem; }
+  .macro-card p { color: var(--gray); font-size: .8rem; margin-top: .2rem; }
+
+  /* ── DIET EXAMPLE ── */
+  .diet-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .diet-table th {
+    text-align: left; padding: .75rem 1rem;
+    background: #1a1a1a; color: var(--green);
+    font-family: 'Montserrat', sans-serif; font-size: .78rem;
+    letter-spacing: 1px; text-transform: uppercase;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .diet-table td { padding: .75rem 1rem; color: var(--gray); font-size: .875rem; border-bottom: 1px solid #1e1e1e; }
+  .diet-table tr:last-child td { border-bottom: none; }
+  .diet-table tr:hover td { background: #161616; color: var(--white); }
+
+  /* ── RUTINA SEMANAL ── */
+  .routine-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5rem; }
+  .day-card {
+    background: var(--card); border: 1px solid #222; border-radius: 10px;
+    padding: .8rem .5rem; text-align: center;
+    transition: all .2s;
+  }
+  .day-card:hover { border-color: var(--green); }
+  .day-card .day-name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .7rem; color: var(--green); letter-spacing: 1px; text-transform: uppercase; margin-bottom: .4rem; }
+  .day-card .day-focus { font-size: .75rem; color: var(--white); font-weight: 600; margin-bottom: .3rem; }
+  .day-card .day-emoji { font-size: 1.4rem; }
+  .day-card.rest { opacity: .5; }
+
+  /* ── HEALTH CHECK ── */
+  .health-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .checklist { display: flex; flex-direction: column; gap: .75rem; }
+  .check-item {
+    display: flex; align-items: center; gap: .75rem;
+    background: var(--card); border: 1px solid #222; border-radius: 10px;
+    padding: 1rem 1.25rem; cursor: pointer; transition: all .2s;
+  }
+  .check-item input { display: none; }
+  .check-box {
+    width: 20px; height: 20px; border-radius: 5px;
+    border: 2px solid #444; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all .2s; font-size: .75rem;
+  }
+  .check-item.checked { border-color: var(--green); background: rgba(57,255,20,.04); }
+  .check-item.checked .check-box { background: var(--green); border-color: var(--green); color: #000; }
+  .check-label { font-weight: 500; font-size: .9rem; }
+  .recommendations { background: var(--card); border: 1px solid #222; border-radius: 12px; padding: 1.5rem; min-height: 200px; }
+  .recommendations h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 1rem; color: var(--green); }
+  .rec-item { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: .75rem; padding-bottom: .75rem; border-bottom: 1px solid #222; }
+  .rec-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .rec-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .rec-text { font-size: .875rem; color: var(--gray); line-height: 1.5; }
+  .rec-placeholder { color: #444; font-size: .875rem; text-align: center; margin-top: 2rem; }
+
+  /* ── CALCULADORA ── */
+  #calculadora { background: linear-gradient(180deg, #111 0%, #0e1a0e 100%); }
+  .calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .calc-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .field { display: flex; flex-direction: column; gap: .4rem; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); }
+  .field input, .field select {
+    background: #1a1a1a; border: 1px solid #2a2a2a;
+    color: var(--white); font-family: 'Inter', sans-serif; font-size: .9rem;
+    padding: .75rem 1rem; border-radius: 8px; outline: none;
+    transition: border-color .2s; width: 100%;
+    -webkit-appearance: none;
+  }
+  .field input:focus, .field select:focus { border-color: var(--green); }
+  .field select option { background: #1a1a1a; }
+  .calc-btn {
+    grid-column: 1 / -1;
+    background: var(--green); color: #000;
+    font-family: 'Montserrat', sans-serif; font-weight: 900;
+    font-size: 1rem; letter-spacing: .5px;
+    padding: 1rem; border-radius: 8px; border: none;
+    cursor: pointer; transition: all .2s; margin-top: .5rem;
+  }
+  .calc-btn:hover { background: var(--green-dim); box-shadow: 0 8px 24px rgba(57,255,20,.3); transform: translateY(-2px); }
+  .calc-result {
+    background: var(--card); border: 1px solid #222; border-radius: 16px;
+    padding: 2rem; min-height: 340px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .result-placeholder { text-align: center; color: #333; }
+  .result-placeholder .big-icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: .5; }
+  .result-placeholder p { font-size: .9rem; }
+  .result-content { display: none; }
+  .result-kcal {
+    text-align: center; margin-bottom: 1.5rem;
+  }
+  .result-kcal .num {
+    font-family: 'Montserrat', sans-serif; font-weight: 900;
+    font-size: 4.5rem; color: var(--green); line-height: 1; letter-spacing: -2px;
+  }
+  .result-kcal .unit { color: var(--gray); font-size: .9rem; margin-top: .25rem; }
+  .result-kcal .label { font-size: .8rem; color: var(--gray); margin-top: .5rem; text-transform: uppercase; letter-spacing: 1px; }
+  .result-macros { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-bottom: 1.5rem; }
+  .result-macro {
+    background: #1a1a1a; border-radius: 8px; padding: .75rem;
+    text-align: center;
+  }
+  .result-macro .val { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.2rem; }
+  .result-macro .lbl { font-size: .7rem; color: var(--gray); margin-top: .2rem; text-transform: uppercase; letter-spacing: .5px; }
+  .result-message {
+    background: rgba(57,255,20,.08); border: 1px solid rgba(57,255,20,.2);
+    border-radius: 10px; padding: 1rem 1.25rem;
+    font-size: .875rem; line-height: 1.6; color: var(--white);
+  }
+  .result-message strong { color: var(--green); }
+
+  /* ── TIPS ── */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .tip {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: var(--card); border: 1px solid #222; border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+  }
+  .tip-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .tip h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .875rem; margin-bottom: .25rem; }
+  .tip p { font-size: .8rem; color: var(--gray); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 2.5rem 6vw;
+    border-top: 1px solid #1a1a1a;
+    color: #444; font-size: .8rem;
+  }
+  footer span { color: var(--green); }
+
+  /* ── HAMBURGER ── */
+  /* oculto en desktop, solo visible dentro del menú móvil */
+  .menu-auth { display: none; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: .25rem;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: all .25s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .calc-wrapper { grid-template-columns: 1fr; }
+    .health-grid { grid-template-columns: 1fr; }
+    .routine-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
+    .calc-form { grid-template-columns: 1fr; }
+    .field.full { grid-column: auto; }
+    .result-macros { grid-template-columns: repeat(3,1fr); }
+
+    .hamburger { display: flex; }
+
+    /* Botones de auth en nav se ocultan — van dentro del menú */
+    .nav-auth { display: none; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #222;
+      padding: 1.25rem 6vw 1.75rem;
+      gap: 1rem;
+      z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1rem; padding: .4rem 0; }
+
+    /* Auth dentro del menú móvil */
+    .menu-auth { display: flex; }
+    .menu-auth {
+      display: flex; gap: .75rem; margin-top: .75rem;
+      padding-top: 1rem; border-top: 1px solid #222;
+    }
+    .menu-auth .btn { flex: 1; text-align: center; padding: .6rem; font-size: .85rem; }
+
+    .hero-stats { gap: 1.5rem; }
+
+    .modal { padding: 1.5rem 1.25rem; }
+  }
+
+  @media (max-width: 400px) {
+    .nav-auth { gap: .35rem; }
+    .nav-auth .btn { font-size: .7rem; padding: .35rem .6rem; }
+  }
+
+  /* ── SCROLL FADE ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── AUTH MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--card); border: 1px solid #2a2a2a;
+    border-radius: 16px; padding: 2rem;
+    width: 100%; max-width: 420px; margin: 1rem;
+    transform: translateY(20px);
+    transition: transform .3s;
+    position: relative;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; color: var(--gray);
+    font-size: 1.4rem; cursor: pointer; line-height: 1;
+    width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; transition: background .2s, color .2s;
+  }
+  .modal-close:hover { background: #222; color: var(--white); }
+  .modal-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 1.4rem; text-align: center;
+    margin-bottom: 1.5rem; letter-spacing: -0.5px;
+  }
+  .modal-logo span { color: var(--green); }
+  .auth-tabs {
+    display: flex; gap: .25rem;
+    background: #111; border-radius: 8px; padding: .25rem;
+    margin-bottom: 1.75rem;
+  }
+  .auth-tab {
+    flex: 1; text-align: center; padding: .55rem;
+    border-radius: 6px; cursor: pointer;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: .82rem; color: var(--gray);
+    transition: all .2s; border: none; background: none;
+  }
+  .auth-tab.active { background: var(--green); color: #000; }
+  .auth-form { display: flex; flex-direction: column; gap: .9rem; }
+  .auth-field { display: flex; flex-direction: column; gap: .35rem; }
+  .auth-field label {
+    font-size: .72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--gray);
+  }
+  .auth-field input {
+    background: #1a1a1a; border: 1px solid #2a2a2a;
+    color: var(--white); font-family: 'Inter', sans-serif; font-size: .9rem;
+    padding: .75rem 1rem; border-radius: 8px; outline: none;
+    transition: border-color .2s; width: 100%;
+  }
+  .auth-field input:focus { border-color: var(--green); }
+  .auth-error {
+    color: var(--danger); font-size: .78rem;
+    background: rgba(255,77,77,.08); border: 1px solid rgba(255,77,77,.2);
+    border-radius: 6px; padding: .6rem .85rem; display: none;
+  }
+  .auth-error.show { display: block; }
+  .auth-success {
+    color: var(--green); font-size: .78rem;
+    background: rgba(57,255,20,.08); border: 1px solid rgba(57,255,20,.2);
+    border-radius: 6px; padding: .6rem .85rem; display: none;
+  }
+  .auth-success.show { display: block; }
+  .auth-submit {
+    background: var(--green); color: #000;
+    font-family: 'Montserrat', sans-serif; font-weight: 900;
+    font-size: .95rem; letter-spacing: .5px;
+    padding: .9rem; border-radius: 8px; border: none;
+    cursor: pointer; transition: all .2s; margin-top: .25rem;
+  }
+  .auth-submit:hover { background: var(--green-dim); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(57,255,20,.25); }
+
+  /* ── NAV AUTH STATE ── */
+  .nav-auth { display: flex; align-items: center; gap: .6rem; }
+  .nav-user { display: flex; align-items: center; gap: .6rem; }
+  .nav-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--green); color: #000;
+    font-family: 'Montserrat', sans-serif; font-weight: 900;
+    font-size: .85rem; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-username {
+    font-size: .85rem; font-weight: 600; color: var(--white);
+    max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .btn-ghost {
+    background: transparent; border: 1px solid #333; color: var(--gray);
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: .78rem; padding: .45rem .9rem; border-radius: 6px;
+    cursor: pointer; transition: all .2s;
+  }
+  .btn-ghost:hover { border-color: var(--danger); color: var(--danger); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Fit<span>Life</span></div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#inicio" onclick="closeMenu()">Inicio</a></li>
+    <li><a href="#alimentacion" onclick="closeMenu()">Alimentación</a></li>
+    <li><a href="#ejercicio" onclick="closeMenu()">Ejercicio</a></li>
+    <li><a href="#salud" onclick="closeMenu()">Salud</a></li>
+    <li><a href="#calculadora" onclick="closeMenu()">Calculadora</a></li>
+    <li class="menu-auth" id="menu-auth"></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:.75rem;">
+    <div class="nav-auth" id="nav-auth"></div>
+    <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div>
+    <div class="hero-badge">🔥 Tu transformación empieza hoy</div>
+    <h1 class="hero-title">Mejora tu<br/><em>salud, fuerza</em><br/>y rendimiento</h1>
+    <p class="hero-sub">Alimentación inteligente, entrenamiento efectivo y herramientas personalizadas para alcanzar tu mejor versión.</p>
+    <div class="hero-btns">
+      <a href="#calculadora" class="btn btn-primary">🔥 Calcular calorías</a>
+      <a href="#ejercicio" class="btn btn-outline">💪 Ver rutinas</a>
+      <a href="#salud" class="btn btn-outline">❤️ Consejos de salud</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><h3>5</h3><p>Secciones</p></div>
+      <div class="stat"><h3>100%</h3><p>Gratis</p></div>
+      <div class="stat"><h3>∞</h3><p>Motivación</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ALIMENTACIÓN -->
+<section id="alimentacion">
+  <div class="fade-in">
+    <div class="section-tag">🥗 Nutrición</div>
+    <h2 class="section-title">Alimentación<br/>saludable</h2>
+    <p class="section-sub">Lo que comes define tu energía, tu recuperación y tus resultados. Aprende a nutrir tu cuerpo con lo que realmente necesita.</p>
+  </div>
+
+  <div class="macro-grid fade-in">
+    <div class="macro-card">
+      <div class="macro-dot" style="background:#ef4444"></div>
+      <div><h5>Proteínas</h5><p>Construyen y reparan músculo. Pollo, huevo, legumbres, atún.</p></div>
+    </div>
+    <div class="macro-card">
+      <div class="macro-dot" style="background:#f59e0b"></div>
+      <div><h5>Carbohidratos</h5><p>Tu combustible principal. Arroz, avena, papa, plátano.</p></div>
+    </div>
+    <div class="macro-card">
+      <div class="macro-dot" style="background:#3b82f6"></div>
+      <div><h5>Grasas saludables</h5><p>Hormonas y energía duradera. Aguacate, nueces, aceite de oliva.</p></div>
+    </div>
+  </div>
+
+  <div class="fade-in" style="background:var(--card);border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:2.5rem;">
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="diet-table" style="min-width:500px;">
+      <thead>
+        <tr><th>Comida</th><th>Alimento</th><th>Cantidad</th><th>Proteína</th><th>Kcal aprox.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🌅 Desayuno</td><td>Avena + huevos revueltos</td><td>80g + 3 huevos</td><td>28g</td><td>450 kcal</td></tr>
+        <tr><td>🥪 Media mañana</td><td>Fruta + maní</td><td>1 fruta + 30g</td><td>8g</td><td>220 kcal</td></tr>
+        <tr><td>🍗 Almuerzo</td><td>Pollo + arroz + ensalada</td><td>200g + 150g</td><td>46g</td><td>620 kcal</td></tr>
+        <tr><td>🥛 Merienda</td><td>Yogur griego + frutas</td><td>200g</td><td>18g</td><td>180 kcal</td></tr>
+        <tr><td>🌙 Cena</td><td>Atún + papa + vegetales</td><td>150g + 200g</td><td>34g</td><td>430 kcal</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="cards-grid fade-in">
+    <div class="card"><div class="card-icon">🍗</div><h4>Pollo a la plancha</h4><p>Alta proteína, baja en grasa. Ideal para cualquier objetivo fitness.</p></div>
+    <div class="card"><div class="card-icon">🥚</div><h4>Huevo entero</h4><p>Proteína completa con todos los aminoácidos esenciales.</p></div>
+    <div class="card"><div class="card-icon">🍚</div><h4>Arroz integral</h4><p>Carbohidrato de absorción lenta. Energía sostenida durante el día.</p></div>
+    <div class="card"><div class="card-icon">🥑</div><h4>Aguacate</h4><p>Grasas monoinsaturadas. Antiinflamatorio y saciante.</p></div>
+  </div>
+</section>
+
+<!-- EJERCICIO -->
+<section id="ejercicio" style="background:var(--dark);">
+  <div class="fade-in">
+    <div class="section-tag">🏋️ Entrenamiento</div>
+    <h2 class="section-title">Tipos de<br/>ejercicio</h2>
+    <p class="section-sub">Combinar diferentes tipos de entrenamiento maximiza tus resultados y mantiene tu cuerpo activo y adaptado.</p>
+  </div>
+
+  <div class="cards-grid fade-in" style="margin-bottom:3rem;">
+    <div class="card">
+      <div class="card-icon">🏋️</div>
+      <h4>Entrenamiento de Fuerza</h4>
+      <p>Desarrolla masa muscular, aumenta el metabolismo y fortalece huesos. Pesas, barras y ejercicios compuestos.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏃</div>
+      <h4>Cardio</h4>
+      <p>Mejora la salud cardiovascular y quema calorías. Trotar, ciclismo, natación o caminata rápida.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>HIIT</h4>
+      <p>Alta intensidad en intervalos cortos. Quema máximas calorías en menos tiempo. Ideal para perder grasa.</p>
+    </div>
+  </div>
+
+  <div class="fade-in">
+    <h3 style="font-family:'Montserrat',sans-serif;font-weight:800;margin-bottom:1.5rem;">Rutina básica semanal</h3>
+    <div class="routine-grid">
+      <div class="day-card"><div class="day-name">Lun</div><div class="day-emoji">💪</div><div class="day-focus">Pecho</div></div>
+      <div class="day-card"><div class="day-name">Mar</div><div class="day-emoji">🦵</div><div class="day-focus">Piernas</div></div>
+      <div class="day-card"><div class="day-name">Mié</div><div class="day-emoji">🏃</div><div class="day-focus">Cardio</div></div>
+      <div class="day-card"><div class="day-name">Jue</div><div class="day-emoji">🔙</div><div class="day-focus">Espalda</div></div>
+      <div class="day-card"><div class="day-name">Vie</div><div class="day-emoji">⚡</div><div class="day-focus">HIIT</div></div>
+      <div class="day-card"><div class="day-name">Sáb</div><div class="day-emoji">🤸</div><div class="day-focus">Hombros</div></div>
+      <div class="day-card rest"><div class="day-name">Dom</div><div class="day-emoji">😴</div><div class="day-focus">Descanso</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SALUD -->
+<section id="salud">
+  <div class="fade-in">
+    <div class="section-tag">❤️ Bienestar</div>
+    <h2 class="section-title">Salud integral</h2>
+    <p class="section-sub">Selecciona tus condiciones físicas actuales y recibe recomendaciones personalizadas al instante.</p>
+  </div>
+
+  <div class="health-grid fade-in">
+    <div>
+      <h4 style="font-family:'Montserrat',sans-serif;font-weight:700;margin-bottom:1rem;color:var(--gray);font-size:.875rem;text-transform:uppercase;letter-spacing:1px;">¿Qué condición tienes actualmente?</h4>
+      <div class="checklist" id="checklist">
+        <label class="check-item" onclick="toggleCheck(this)" data-rec="rodilla">
+          <div class="check-box">✓</div>
+          <span class="check-label">🦵 Dolor de rodilla</span>
+        </label>
+        <label class="check-item" onclick="toggleCheck(this)" data-rec="espalda">
+          <div class="check-box">✓</div>
+          <span class="check-label">🔙 Dolor de espalda</span>
+        </label>
+        <label class="check-item" onclick="toggleCheck(this)" data-rec="sobrepeso">
+          <div class="check-box">✓</div>
+          <span class="check-label">⚖️ Sobrepeso</span>
+        </label>
+        <label class="check-item" onclick="toggleCheck(this)" data-rec="sedentarismo">
+          <div class="check-box">✓</div>
+          <span class="check-label">🛋️ Sedentarismo</span>
+        </label>
+        <label class="check-item" onclick="toggleCheck(this)" data-rec="estres">
+          <div class="check-box">✓</div>
+          <span class="check-label">😟 Estrés / Ansiedad</span>
+        </label>
+        <label class="check-item" onclick="toggleCheck(this)" data-rec="sueno">
+          <div class="check-box">✓</div>
+          <span class="check-label">😴 Problemas de sueño</span>
+        </label>
+      </div>
+    </div>
+    <div>
+      <div class="recommendations" id="recs-box">
+        <h4>Tus recomendaciones</h4>
+        <div id="recs-content">
+          <p class="rec-placeholder">👈 Selecciona tus condiciones para ver recomendaciones personalizadas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tips-grid fade-in" style="margin-top:3rem;">
+    <div class="tip"><div class="tip-icon">💧</div><div><h5>Hidratación</h5><p>Bebe al menos 2-3 litros de agua al día. Más si entrenas intensamente.</p></div></div>
+    <div class="tip"><div class="tip-icon">😴</div><div><h5>Descanso</h5><p>Duerme 7-9 horas. El músculo crece mientras descansas, no mientras entrenas.</p></div></div>
+    <div class="tip"><div class="tip-icon">🧘</div><div><h5>Estrés</h5><p>El cortisol alto sabotea tus resultados. Medita, respira, sal a caminar.</p></div></div>
+    <div class="tip"><div class="tip-icon">🚭</div><div><h5>Sin tóxicos</h5><p>Alcohol y tabaco reducen el rendimiento, la recuperación y la masa muscular.</p></div></div>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section id="calculadora">
+  <div class="fade-in">
+    <div class="section-tag">🔥 Herramienta</div>
+    <h2 class="section-title">Calculadora<br/>de calorías</h2>
+    <p class="section-sub">Basada en la fórmula Mifflin-St Jeor. Ingresa tus datos y obtén tu requerimiento calórico personalizado.</p>
+  </div>
+
+  <div class="calc-wrapper fade-in">
+    <div>
+      <div class="calc-form">
+        <div class="field">
+          <label>Edad (años)</label>
+          <input type="number" id="edad" placeholder="25" min="10" max="100"/>
+        </div>
+        <div class="field">
+          <label>Sexo</label>
+          <select id="sexo">
+            <option value="h">Hombre</option>
+            <option value="m">Mujer</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Peso (kg)</label>
+          <input type="number" id="peso" placeholder="70" min="30" max="250"/>
+        </div>
+        <div class="field">
+          <label>Altura (cm)</label>
+          <input type="number" id="altura" placeholder="170" min="100" max="250"/>
+        </div>
+        <div class="field full">
+          <label>Nivel de actividad</label>
+          <select id="actividad">
+            <option value="1.2">Sedentario (poco o nada de ejercicio)</option>
+            <option value="1.375">Levemente activo (1–3 días/semana)</option>
+            <option value="1.55">Moderadamente activo (3–5 días/semana)</option>
+            <option value="1.725">Muy activo (6–7 días/semana)</option>
+            <option value="1.9">Extremadamente activo (atleta/doble sesión)</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Objetivo</label>
+          <select id="objetivo">
+            <option value="-500">⬇️ Bajar peso (déficit –500 kcal)</option>
+            <option value="0">⚖️ Mantener peso</option>
+            <option value="300">⬆️ Subir masa muscular (+300 kcal)</option>
+          </select>
+        </div>
+        <button class="calc-btn" onclick="calcular()">⚡ CALCULAR MIS CALORÍAS</button>
+      </div>
+    </div>
+
+    <div class="calc-result" id="result-box">
+      <div class="result-placeholder" id="result-placeholder">
+        <div class="big-icon">🔥</div>
+        <p>Completa el formulario y descubre<br/>cuántas calorías necesitas al día.</p>
+      </div>
+      <div class="result-content" id="result-content">
+        <div class="result-kcal">
+          <div class="num" id="res-kcal">0</div>
+          <div class="unit">kcal / día</div>
+          <div class="label">Calorías diarias recomendadas</div>
+        </div>
+        <div class="result-macros">
+          <div class="result-macro">
+            <div class="val" id="res-prot" style="color:#ef4444">0g</div>
+            <div class="lbl">Proteína</div>
+          </div>
+          <div class="result-macro">
+            <div class="val" id="res-carb" style="color:#f59e0b">0g</div>
+            <div class="lbl">Carbos</div>
+          </div>
+          <div class="result-macro">
+            <div class="val" id="res-fat" style="color:#3b82f6">0g</div>
+            <div class="lbl">Grasas</div>
+          </div>
+        </div>
+        <div class="result-message" id="res-msg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-logo">Fit<span>Life</span></div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Iniciar sesión</button>
+      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Registrarse</button>
+    </div>
+
+    <!-- Login -->
+    <form class="auth-form" id="form-login" onsubmit="handleLogin(event)">
+      <div class="auth-field">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="tu@email.com" autocomplete="email"/>
+      </div>
+      <div class="auth-field">
+        <label>Contraseña</label>
+        <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+      </div>
+      <div class="auth-error" id="login-error"></div>
+      <button type="submit" class="auth-submit">Entrar</button>
+    </form>
+
+    <!-- Register -->
+    <form class="auth-form" id="form-register" onsubmit="handleRegister(event)" style="display:none;">
+      <div class="auth-field">
+        <label>Nombre</label>
+        <input type="text" id="reg-name" placeholder="Tu nombre completo" autocomplete="name"/>
+      </div>
+      <div class="auth-field">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="tu@email.com" autocomplete="email"/>
+      </div>
+      <div class="auth-field">
+        <label>Contraseña</label>
+        <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password"/>
+      </div>
+      <div class="auth-field">
+        <label>Confirmar contraseña</label>
+        <input type="password" id="reg-pass2" placeholder="Repite tu contraseña" autocomplete="new-password"/>
+      </div>
+      <div class="auth-error" id="reg-error"></div>
+      <div class="auth-success" id="reg-success"></div>
+      <button type="submit" class="auth-submit">Crear cuenta</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Hecho con 💚 por <span>FitLife</span> — Proyecto SENA Frontend</p>
+  <p style="margin-top:.5rem;">La información es educativa. Consulta a un profesional de salud.</p>
+</footer>
+
+<script>
+// ── CALCULADORA ──
+function calcular() {
+  const edad = +document.getElementById('edad').value;
+  const sexo = document.getElementById('sexo').value;
+  const peso = +document.getElementById('peso').value;
+  const altura = +document.getElementById('altura').value;
+  const actividad = +document.getElementById('actividad').value;
+  const objetivo = +document.getElementById('objetivo').value;
+
+  if (!edad || !peso || !altura) {
+    alert('⚠️ Por favor completa todos los campos.');
+    return;
+  }
+
+  // Mifflin-St Jeor
+  let tmb = (10 * peso) + (6.25 * altura) - (5 * edad);
+  tmb += sexo === 'h' ? 5 : -161;
+
+  let tdee = tmb * actividad;
+  let final = Math.round(tdee + objetivo);
+  if (final < 1200) final = 1200;
+
+  // Macros: proteína 30%, carbos 45%, grasa 25%
+  const prot = Math.round((final * 0.30) / 4);
+  const carb = Math.round((final * 0.45) / 4);
+  const fat  = Math.round((final * 0.25) / 9);
+
+  // Mensaje
+  const objSel = document.getElementById('objetivo').value;
+  let msg = '';
+  if (objSel === '-500') msg = `Debes consumir <strong>${final} kcal/día</strong>. Con este déficit perderás aprox. 0.5 kg por semana de forma saludable. ¡Prioriza proteína para conservar músculo!`;
+  else if (objSel === '0') msg = `Debes consumir <strong>${final} kcal/día</strong> para mantener tu peso actual. Distribuye tus comidas en 4-5 tomas diarias.`;
+  else msg = `Debes consumir <strong>${final} kcal/día</strong>. El superávit te ayudará a ganar masa muscular progresivamente. Entrena duro y duerme bien.`;
+
+  // Animar número
+  const el = document.getElementById('res-kcal');
+  let start = 0; const duration = 800;
+  const step = final / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= final) { start = final; clearInterval(timer); }
+    el.textContent = Math.round(start).toLocaleString();
+  }, 16);
+
+  document.getElementById('res-prot').textContent = prot + 'g';
+  document.getElementById('res-carb').textContent = carb + 'g';
+  document.getElementById('res-fat').textContent  = fat  + 'g';
+  document.getElementById('res-msg').innerHTML = msg;
+
+  document.getElementById('result-placeholder').style.display = 'none';
+  document.getElementById('result-content').style.display = 'block';
+}
+
+// ── HEALTH CHECKLIST ──
+const recs = {
+  rodilla: [
+    { icon:'🏊', text:'Opta por ejercicios de bajo impacto: natación, bicicleta estática.' },
+    { icon:'🧘', text:'Fortalece cuádriceps y glúteos para proteger la articulación.' },
+    { icon:'🩹', text:'Evita sentadillas profundas hasta que el dolor remita.' }
+  ],
+  espalda: [
+    { icon:'🛌', text:'Evita levantar objetos pesados con la espalda doblada.' },
+    { icon:'💪', text:'Fortalece el core: planchas y ejercicios de estabilización.' },
+    { icon:'🧘', text:'Incorpora estiramientos de columna diariamente al despertar.' }
+  ],
+  sobrepeso: [
+    { icon:'🔥', text:'Combina déficit calórico (–300 a –500 kcal) con ejercicio regular.' },
+    { icon:'🏃', text:'Empieza con caminatas de 30 min diarios e incrementa gradualmente.' },
+    { icon:'🥗', text:'Aumenta el consumo de proteínas para preservar músculo al bajar.' }
+  ],
+  sedentarismo: [
+    { icon:'⏰', text:'Regla de los 20 min: levántate y muévete cada hora de trabajo.' },
+    { icon:'🚶', text:'Empieza con 10 min de caminata diaria y aumenta cada semana.' },
+    { icon:'📱', text:'Usa un recordatorio para moverte y romper el ciclo sedentario.' }
+  ],
+  estres: [
+    { icon:'🧘', text:'Practica respiración diafragmática 5 min por la mañana y noche.' },
+    { icon:'🏃', text:'El ejercicio aeróbico libera endorfinas y reduce el cortisol.' },
+    { icon:'📵', text:'Evita pantallas 1 hora antes de dormir para calmar el sistema nervioso.' }
+  ],
+  sueno: [
+    { icon:'🌙', text:'Mantén un horario fijo de sueño, incluso los fines de semana.' },
+    { icon:'🌡️', text:'Duerme en un cuarto fresco (18–20°C) y completamente oscuro.' },
+    { icon:'☕', text:'Evita cafeína después de las 2 pm para no afectar el sueño profundo.' }
+  ]
+};
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  updateRecs();
+}
+
+function updateRecs() {
+  const checked = document.querySelectorAll('.check-item.checked');
+  const box = document.getElementById('recs-content');
+
+  if (checked.length === 0) {
+    box.innerHTML = '<p class="rec-placeholder">👈 Selecciona tus condiciones para ver recomendaciones personalizadas</p>';
+    return;
+  }
+
+  let html = '';
+  checked.forEach(item => {
+    const key = item.getAttribute('data-rec');
+    (recs[key] || []).forEach(r => {
+      html += `<div class="rec-item"><div class="rec-icon">${r.icon}</div><div class="rec-text">${r.text}</div></div>`;
+    });
+  });
+  box.innerHTML = html;
+}
+
+// ── SCROLL FADE ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── ENTER en calculadora / ESC cierra modal ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.activeElement.closest('#calculadora')) calcular();
+  if (e.key === 'Escape') closeModal();
+});
+
+// ── AUTH ──
+function openModal(tab) {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  switchTab(tab || 'login');
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  clearErrors();
+}
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+function switchTab(tab) {
+  const isLogin = tab === 'login';
+  document.getElementById('tab-login').classList.toggle('active', isLogin);
+  document.getElementById('tab-register').classList.toggle('active', !isLogin);
+  document.getElementById('form-login').style.display = isLogin ? 'flex' : 'none';
+  document.getElementById('form-register').style.display = isLogin ? 'none' : 'flex';
+  clearErrors();
+}
+function clearErrors() {
+  document.querySelectorAll('.auth-error, .auth-success').forEach(el => {
+    el.classList.remove('show'); el.textContent = '';
+  });
+}
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.classList.add('show');
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  clearErrors();
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  if (!email || !pass) { showError('login-error', 'Completa todos los campos.'); return; }
+
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email, password: pass })
+    });
+    const data = await res.json();
+    if (!res.ok) { showError('login-error', data.error || 'Error al iniciar sesión.'); return; }
+    closeModal();
+    renderNav(data);
+  } catch {
+    showError('login-error', 'No se pudo conectar con el servidor.');
+  }
+}
+
+async function handleRegister(e) {
+  e.preventDefault();
+  clearErrors();
+  const name  = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass  = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+
+  if (!name)  { showError('reg-error', 'Ingresa tu nombre.'); return; }
+  if (!email || !/\S+@\S+\.\S+/.test(email)) { showError('reg-error', 'Ingresa un email válido.'); return; }
+  if (pass.length < 6) { showError('reg-error', 'La contraseña debe tener al menos 6 caracteres.'); return; }
+  if (pass !== pass2)  { showError('reg-error', 'Las contraseñas no coinciden.'); return; }
+
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ name, email, password: pass })
+    });
+    const data = await res.json();
+    if (!res.ok) { showError('reg-error', data.error || 'Error al registrarse.'); return; }
+    closeModal();
+    renderNav(data);
+  } catch {
+    showError('reg-error', 'No se pudo conectar con el servidor.');
+  }
+}
+
+async function logout() {
+  await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+  renderNav(null);
+}
+
+function renderNav(session) {
+  const container  = document.getElementById('nav-auth');
+  const menuAuth   = document.getElementById('menu-auth');
+
+  if (session) {
+    const initial = session.name.charAt(0).toUpperCase();
+    // Desktop nav
+    container.innerHTML =
+      `<div class="nav-user">
+        <div class="nav-avatar">${initial}</div>
+        <span class="nav-username">${session.name}</span>
+        <button class="btn-ghost" onclick="logout()">Salir</button>
+      </div>`;
+    // Menú móvil
+    if (menuAuth) menuAuth.innerHTML =
+      `<div style="display:flex;align-items:center;gap:.75rem;width:100%;">
+        <div class="nav-avatar">${initial}</div>
+        <span style="font-weight:600;">${session.name}</span>
+        <button class="btn-ghost" style="margin-left:auto;" onclick="logout();closeMenu()">Salir</button>
+      </div>`;
+  } else {
+    // Desktop nav
+    container.innerHTML =
+      `<button class="btn btn-outline" style="padding:.45rem 1rem;font-size:.8rem;" onclick="openModal('login')">Iniciar sesión</button>
+       <button class="btn btn-primary" style="padding:.45rem 1rem;font-size:.8rem;" onclick="openModal('register')">Registrarse</button>`;
+    // Menú móvil
+    if (menuAuth) menuAuth.innerHTML =
+      `<button class="btn btn-outline" onclick="openModal('login');closeMenu()">Iniciar sesión</button>
+       <button class="btn btn-primary" onclick="openModal('register');closeMenu()">Registrarse</button>`;
+  }
+}
+
+// ── MENÚ HAMBURGUESA ──
+function toggleMenu() {
+  const btn   = document.getElementById('hamburger');
+  const links = document.getElementById('nav-links');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('nav-links').classList.remove('open');
+}
+// Cerrar menú al hacer click fuera
+document.addEventListener('click', function(e) {
+  const nav = document.querySelector('nav');
+  if (!nav.contains(e.target)) closeMenu();
+});
+
+// Al cargar la página, verificar sesión activa con el servidor
+(async () => {
+  try {
+    const res = await fetch('/api/me', { credentials: 'include' });
+    const data = res.ok ? await res.json() : null;
+    renderNav(data);
+  } catch {
+    renderNav(null);
+  }
+})();
+</script>
+</body>
+</html>
