@@ -19,7 +19,6 @@ app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'fitness-landing.html'));
 });
 
-// ── Helpers ────────────────────────────────────────────────────────────────
 
 function createToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
@@ -45,7 +44,6 @@ function setCookie(res, token) {
   });
 }
 
-// ── Rutas de autenticación ─────────────────────────────────────────────────
 
 app.post('/api/register', async (req, res) => {
   const { name, email, password } = req.body;
@@ -98,7 +96,6 @@ app.get('/api/me', requireAuth, (req, res) => {
   res.json({ name: req.user.name, email: req.user.email });
 });
 
-// ── Inicio ─────────────────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
   console.log(`FitLife server corriendo en http://localhost:${PORT}`);
